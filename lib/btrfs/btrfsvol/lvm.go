@@ -183,8 +183,9 @@ func (lv *LogicalVolume[PhysicalVolume]) addMapping(m Mapping, dryRun bool) erro
 		// This should not happen because calling .AddMapping
 		// should update the two in lockstep; if these don't
 		// match up, it's a bug in this code.
-		panic(fmt.Errorf("should not happen: len(physicalOverlaps):%d != numOverlappingStripes:%d",
-			len(physicalOverlaps), numOverlappingStripes))
+		// FIXME Don't panic, but log. Maybe this case imply DATA|DUP?
+		fmt.Fprintf(os.Stderr, "should not happen: len(physicalOverlaps):%d != numOverlappingStripes:%d\n",
+			len(physicalOverlaps), numOverlappingStripes)
 	}
 
 	if dryRun {
