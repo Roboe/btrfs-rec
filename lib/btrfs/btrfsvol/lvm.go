@@ -144,7 +144,7 @@ func (lv *LogicalVolume[PhysicalVolume]) addMapping(m Mapping, dryRun bool) erro
 	var err error
 	newChunk, err = newChunk.union(logicalOverlaps...)
 	if err != nil {
-		return fmt.Errorf("(%p).AddMapping: %w", lv, err)
+		return fmt.Errorf("(%p).AddMapping (logicalOverlaps): %w", lv, err)
 	}
 
 	// physical2logical
@@ -162,7 +162,7 @@ func (lv *LogicalVolume[PhysicalVolume]) addMapping(m Mapping, dryRun bool) erro
 	})
 	newExt, err = newExt.union(physicalOverlaps...)
 	if err != nil {
-		return fmt.Errorf("(%p).AddMapping: %w", lv, err)
+		return fmt.Errorf("(%p).AddMapping (physicalOverlaps): %w", lv, err)
 	}
 
 	if newChunk.Flags != newExt.Flags {
