@@ -19,6 +19,7 @@ import (
 	"golang.org/x/text/number"
 
 	"git.lukeshu.com/btrfs-progs-ng/lib/fmtutil"
+	"git.lukeshu.com/btrfs-progs-ng/lib/btrfs/btrfsvol"
 )
 
 var printer = message.NewPrinter(language.English)
@@ -140,6 +141,10 @@ func toRat[T constraints.Integer | constraints.Float | *big.Int | *big.Float | *
 		} else {
 			y, _ = big.NewFloat(x).Rat(nil)
 		}
+
+	// FIXME This should be type-casted before somehow, but I lack the Go skills to do it properly right now
+	case btrfsvol.AddrDelta:
+		y = toRat(int64(x))
 
 	default:
 		panic(fmt.Errorf("should not happen: unmatched type %T", x))
