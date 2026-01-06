@@ -90,7 +90,7 @@ func (a devextMapping) union(rest ...devextMapping) (devextMapping, error) {
 			ret.Flags = ext.Flags
 		}
 		if ret.Flags != ext.Flags {
-			return ret, fmt.Errorf("mismatch flags: %v != %v", ret.Flags.Val, ext.Flags.Val)
+			return ret, fmt.Errorf("mismatch flags (devext): %v != %v", ret.Flags.Val, ext.Flags.Val)
 		}
 	}
 	// done

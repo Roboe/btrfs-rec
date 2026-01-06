@@ -93,7 +93,7 @@ func (a chunkMapping) union(rest ...chunkMapping) (chunkMapping, error) {
 			ret.Flags = chunk.Flags
 		}
 		if ret.Flags != chunk.Flags {
-			return ret, fmt.Errorf("mismatch flags: %v != %v", ret.Flags.Val, chunk.Flags.Val)
+			return ret, fmt.Errorf("mismatch flags (chunk): %v != %v", ret.Flags.Val, chunk.Flags.Val)
 		}
 	}
 	// done
