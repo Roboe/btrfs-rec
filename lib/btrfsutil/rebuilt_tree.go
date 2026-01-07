@@ -7,6 +7,7 @@ package btrfsutil
 import (
 	"context"
 	"fmt"
+	"os"
 	"sync"
 	"time"
 
@@ -665,10 +666,13 @@ func (tree *RebuiltTree) RebuiltShouldReplace(oldNode, newNode btrfsvol.LogicalA
 			// TODO: This is a panic because I'm not really sure what the
 			// best way to handle this is, and so if this happens I want the
 			// program to crash and force me to figure out how to handle it.
-			panic(fmt.Errorf("dup nodes in tree=%v: old=%v=%v ; new=%v=%v",
+			// HACK Don't panic, just log
+			fmt.Fprintf(os.Stderr, "dup nodes in tree=%v: old=%v=%v ; new=%v=%v",
 				tree.ID,
 				oldNode, tree.forrest.graph.Nodes[oldNode],
-				newNode, tree.forrest.graph.Nodes[newNode]))
+				newNode, tree.forrest.graph.Nodes[newNode])
+			// HACK YOLO, I have DATA|DUP and I want any of them
+			return true
 		}
 	}
 }
