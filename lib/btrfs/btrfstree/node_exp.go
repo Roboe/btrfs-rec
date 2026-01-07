@@ -49,7 +49,7 @@ func (exp NodeExpectations) Check(node *Node) error {
 		}
 	}
 	if node.Head.NumItems == 0 {
-		errs = append(errs, fmt.Errorf("has no items"))
+		errs = append(errs, fmt.Errorf("node %v has no items", node.Head.Addr))
 	} else {
 		if minItem, _ := node.MinItem(); exp.MinItem.OK && exp.MinItem.Val.Compare(minItem) > 0 {
 			errs = append(errs, fmt.Errorf("expected minItem>=%v but node has minItem=%v",

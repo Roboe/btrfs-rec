@@ -102,7 +102,7 @@ func (n GraphNode) CheckExpectations(g Graph, exp btrfstree.NodeExpectations) er
 		}
 	}
 	if n.NumItems(g) == 0 {
-		errs = append(errs, fmt.Errorf("has no items"))
+		errs = append(errs, fmt.Errorf("graph node %v has no items", n.Addr))
 	} else {
 		if minItem := n.MinItem(g); exp.MinItem.OK && exp.MinItem.Val.Compare(minItem) > 0 {
 			errs = append(errs, fmt.Errorf("expected minItem>=%v but node has minItem=%v",
